@@ -46,7 +46,7 @@ module.exports = {
                 
                 const newEmbed = new Discord.MessageEmbed()
                 .setColor(color)
-                .setTitle(`${message.author.username}'s pumpkin design`)
+                .setTitle(`${message.author.username}'s Pumpkin Design`)
                 .setImage(s.attachments.first().attachment)
                     
                 message.channel.send({ embeds: [newEmbed] });

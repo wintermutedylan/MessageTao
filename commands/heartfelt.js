@@ -15,7 +15,7 @@ module.exports = {
         
 
         
-        const DM = await message.member.send('Who would you like to send this heartfelt letter to');
+        const DM = await message.member.send('Who would you like to this heartfelt letter to be sent from');
         
         const filter = m => m.author.id === message.author.id;
         
@@ -183,7 +183,7 @@ async function customMessageContents(to, dm, id, embed){
     const collector2 = dm.channel.createMessageCollector({ filter, max: 1, time: 60000});
     let f;
         
-            dm.channel.send(`Who is sending, ${to}, this heartfelt message?`);
+            dm.channel.send(`${to}, who are you sending this heartfelt message to?`);
                 collector2.on('collect', m2 => {
                     f = m2.content;
                     
@@ -194,7 +194,7 @@ async function customMessageContents(to, dm, id, embed){
                     return
                 }
                 else {
-                    customFrom(to, dm, id, embed, color, f);
+                    customFrom(f, dm, id, embed, color, to);
                     
                     
                     

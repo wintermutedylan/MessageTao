@@ -15,7 +15,7 @@ module.exports = {
         
 
         
-        const DM = await message.member.send('Who would you like to this heartfelt letter to be sent from');
+        const DM = await message.member.send('Who would you like to this heartfelt letter to be sent from? [e.g: Hu tao, Rosaria, <name of irl/discord sender>]');
         
         const filter = m => m.author.id === message.author.id;
         
@@ -136,7 +136,7 @@ async function validation(id,embed, dm){
     const filter = m => m.author.id === id.author.id && (m.content.toLowerCase() === 'yes' || m.content.toLowerCase() === 'no');
     const collector2 = dm.channel.createMessageCollector({ filter, max: 1, time: 60000});
     let f;
-    dm.channel.send(`Is the following embed correct?  Keep in mind the color is random.`);
+    dm.channel.send(`Is the following embed correct? [Yes/No]  Keep in mind the color is random.`);
     dm.channel.send({ embeds: [embed] });
     collector2.on('collect', m2 => {
         f = m2.content;
@@ -183,7 +183,7 @@ async function customMessageContents(to, dm, id, embed){
     const collector2 = dm.channel.createMessageCollector({ filter, max: 1, time: 60000});
     let f;
         
-            dm.channel.send(`${to}, who are you sending this heartfelt message to?`);
+            dm.channel.send(`${to}, who are you sending this heartfelt message to? [e.g: Mother, Father, <name of irl/discord receiver>]`);
                 collector2.on('collect', m2 => {
                     f = m2.content;
                     
@@ -213,7 +213,7 @@ async function customFrom(to, dm, id, embed, color, from){
     const collector2 = dm.channel.createMessageCollector({ filter, max: 1, time: 120000});
     let f;
         
-            dm.channel.send(`What would ${from} like to send to ${to}?`);
+            dm.channel.send(`What would ${from} like to send to ${to}? `);
                 collector2.on('collect', m2 => {
                     f = m2.content;
                     

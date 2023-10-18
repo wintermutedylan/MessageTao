@@ -9,12 +9,12 @@ module.exports = {
         
 
         
-        const DM = await message.member.send('Please submit a image of your pumpkin/pumpkin design');
+        const DM = await message.member.send('Please submit a image of your pumpkin/pumpkin design. [File type can be JPEG, PNG, JPG]');
         
         const filter = m => m.author.id === message.author.id;
         
         
-        const collector = DM.channel.createMessageCollector({ filter, max: 1, time: 20000});
+        const collector = DM.channel.createMessageCollector({ filter, max: 1, time: 60000});
         
         
         var s;
@@ -39,8 +39,9 @@ module.exports = {
             else {
                 var colorArray = ['#4d2020', '#5f2424', '#722828', '#862c2c', '#992f30', '#ad3333'];
                 var color = colorArray[Math.floor(Math.random()*colorArray.length)];
-                if (s.attachments.first().attachment != 'image/jpeg' && s.attachments.first().attachment != 'image/png'){
+                if (s.attachments.first().contentType != 'image/jpeg' && s.attachments.first().contentType != 'image/png' && s.attachments.first().contentType != 'image/jpg'){
                     DM.channel.send("please run the command again and send an image.");
+                    return;
                 }
                 
                 

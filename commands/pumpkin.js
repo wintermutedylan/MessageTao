@@ -39,7 +39,8 @@ module.exports = {
             else {
                 var colorArray = ['#4d2020', '#5f2424', '#722828', '#862c2c', '#992f30', '#ad3333'];
                 var color = colorArray[Math.floor(Math.random()*colorArray.length)];
-                if (s.attachments.first().contentType != 'image/jpeg' && s.attachments.first().contentType != 'image/png' && s.attachments.first().contentType != 'image/jpg'){
+                
+                if (s.attachments.first().contentType != 'image/jpeg' && s.attachments.first().contentType != 'image/png' && s.attachments.first().contentType != 'image/jpg' && s.attachments.first().contentType != 'image/webp'){
                     DM.channel.send("please run the command again and send an image.");
                     return;
                 }
@@ -49,9 +50,11 @@ module.exports = {
                 .setColor(color)
                 .setTitle(`${message.author.username}'s Pumpkin Design`)
                 .setImage(s.attachments.first().attachment)
-                    
-                message.channel.send({ embeds: [newEmbed] });
                 
+                    
+                DM.channel.send(`Thank you for your submission. Please check the following channel to see yours and others submissions. ${channelMention("1163870435553841212")}`);
+                client.channels.cache.get("1163870435553841212").send({ embeds: [newEmbed] }); //HTC pumpkin channel 
+                client.channels.cache.get("1164749338883412038").send({ embeds: [newEmbed] }); //Rosaria mains pumpkin channel
                     
 
                    

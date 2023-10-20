@@ -42,15 +42,20 @@ module.exports = {
                 return
             }
             else {
+                if(s.length > 2000){
+                    
+                    dm.channel.send("The message you sent was too long.  It must be under 2000 characters. Please run the command again");
+                    return;
+                }
                     
                     to = s;
                     if (to.toLowerCase() == 'hutao' || to.toLowerCase() == 'hu tao' || to.toLowerCase() == 'rosaria'){
-                        messageContents(to, DM, message, newEmbed);
+                        messageContents(to, DM, message, newEmbed, client);
                         return;
                        
                         
                     } else {
-                        customMessageContents(to, DM, message, newEmbed);
+                        customMessageContents(to, DM, message, newEmbed,client);
                         return;
                     }
                     
@@ -80,7 +85,7 @@ module.exports = {
     
 }
 
-async function messageContents(to, dm, id, embed){
+async function messageContents(to, dm, id, embed, c){
     var colorArray = ['#4d2020', '#5f2424', '#722828', '#862c2c', '#992f30', '#ad3333'];
     var color = colorArray[Math.floor(Math.random()*colorArray.length)];
     const filter = m => m.author.id === id.author.id;
@@ -97,11 +102,16 @@ async function messageContents(to, dm, id, embed){
                     return
                 }
                 else {
+                    if(f.length > 2000){
+                        
+                        dm.channel.send("The message you sent was too long.  It must be under 2000 characters. Please run the command again");
+                        return;
+                    }
                     
                     
                     
                     
-                    buildEmbed(id, 'Hu Tao', 'Grandpa', embed, color, f, dm);
+                    buildEmbed(id, 'Hu Tao', 'Grandpa', embed, color, f, dm, c);
                     
                     
             }
@@ -118,11 +128,16 @@ async function messageContents(to, dm, id, embed){
                     return
                 }
                 else {
+                    if(f.length > 2000){
+                        
+                        dm.channel.send("The message you sent was too long.  It must be under 2000 characters. Please run the command again");
+                        return;
+                    }
                     
                     
                     
                     
-                    buildEmbed(id, 'Rosaria', 'My Family', embed, color, f, dm);
+                    buildEmbed(id, 'Rosaria', 'My Family', embed, color, f, dm, c);
                     
                     
             }
@@ -132,7 +147,7 @@ async function messageContents(to, dm, id, embed){
         
     
 }
-async function validation(id,embed, dm){
+async function validation(id,embed, dm, c){
     const filter = m => m.author.id === id.author.id && (m.content.toLowerCase() === 'yes' || m.content.toLowerCase() === 'no');
     const collector2 = dm.channel.createMessageCollector({ filter, max: 1, time: 60000});
     let f;
@@ -149,7 +164,8 @@ async function validation(id,embed, dm){
     }
     if (f.toLowerCase() == 'yes'){
         dm.channel.send("The embed will now be sent to the correct channels");
-        id.channel.send({ embeds: [embed] }); // this needs to be updated with the two different channels in each server
+        c.channels.cache.get("1163869077148807231").send({ embeds: [embed] }); //HTC heartfelt message channel
+        c.channels.cache.get("1164748966353707100").send({ embeds: [embed] }); //Rosaria mains channel
     } else if (f.toLowerCase() == 'no'){
         dm.channel.send("Your message won't be sent.  you will need to run the command again to restart");
 
@@ -159,7 +175,12 @@ async function validation(id,embed, dm){
 
 }
 
-async function buildEmbed(id, from, to, embed, color, contents, dm){
+async function buildEmbed(id, from, to, embed, color, contents, dm, c){
+    if(contents.length > 2000){
+        
+        dm.channel.send("The message you sent was too long.  It must be under 2000 characters. Please run the command again");
+        return;
+    }
      
     embed.setColor(color)
     embed.setAuthor(id.author.username)
@@ -172,11 +193,11 @@ async function buildEmbed(id, from, to, embed, color, contents, dm){
                             
                             > ${contents}`)
 
-    validation(id, embed, dm);
+    validation(id, embed, dm, c);
 
 }
 
-async function customMessageContents(to, dm, id, embed){
+async function customMessageContents(to, dm, id, embed, c){
     var colorArray = ['#4d2020', '#5f2424', '#722828', '#862c2c', '#992f30', '#ad3333'];
     var color = colorArray[Math.floor(Math.random()*colorArray.length)];
     const filter = m => m.author.id === id.author.id;
@@ -194,7 +215,12 @@ async function customMessageContents(to, dm, id, embed){
                     return
                 }
                 else {
-                    customFrom(f, dm, id, embed, color, to);
+                    if(f.length > 2000){
+                        
+                        dm.channel.send("The message you sent was too long.  It must be under 2000 characters. Please run the command again");
+                        return;
+                    }
+                    customFrom(f, dm, id, embed, color, to, c);
                     
                     
                     
@@ -208,12 +234,19 @@ async function customMessageContents(to, dm, id, embed){
     
 }
 
-async function customFrom(to, dm, id, embed, color, from){
+async function customFrom(to, dm, id, embed, color, from, c){
     const filter = m => m.author.id === id.author.id;
     const collector2 = dm.channel.createMessageCollector({ filter, max: 1, time: 120000});
     let f;
+    let m = `What would ${from} like to send to ${to}? `;
+
+    if(m.length > 2000){
         
-            dm.channel.send(`What would ${from} like to send to ${to}? `);
+        dm.channel.send("The message you sent was too long.  It must be under 2000 characters. Please run the command again");
+        return;
+    }
+        
+            dm.channel.send(m);
                 collector2.on('collect', m2 => {
                     f = m2.content;
                     
@@ -224,7 +257,12 @@ async function customFrom(to, dm, id, embed, color, from){
                     return
                 }
                 else {
-                    buildEmbed(id, from, to, embed, color, f, dm);
+                    if(f.length > 2000){
+                        
+                        dm.channel.send("The message you sent was too long.  It must be under 2000 characters. Please run the command again");
+                        return;
+                    }
+                    buildEmbed(id, from, to, embed, color, f, dm, c);
                     
                     
                     

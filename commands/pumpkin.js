@@ -68,7 +68,7 @@ module.exports = {
             
         });
     } else {
-        message.reply(`Please only roll in the following channels: ${channelMention("852360137528049684")}, ${channelMention("1055380066315546704")}`)
+        message.reply(`Please only use that command in the following channels: ${channelMention("852360137528049684")}, ${channelMention("1055380066315546704")}`)
     }
         
     

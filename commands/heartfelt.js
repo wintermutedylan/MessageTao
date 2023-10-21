@@ -15,7 +15,7 @@ module.exports = {
         
 
         
-        const DM = await message.member.send('Who would you like to this heartfelt letter to be sent from? [e.g: Hu tao, Rosaria, <name of irl/discord sender>]');
+        const DM = await message.member.send('Who would you like this heartfelt letter to be sent from? [e.g: Hu tao, Rosaria, <name of irl/discord sender>]');
         
         const filter = m => m.author.id === message.author.id;
         

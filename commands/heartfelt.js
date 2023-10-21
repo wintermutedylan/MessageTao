@@ -10,7 +10,7 @@ module.exports = {
         
         
         
-        
+        if (message.channel.id === "852360137528049684" || message.channel.id === "1055380066315546704"){
         const newEmbed = new Discord.MessageEmbed();
         
 
@@ -70,6 +70,9 @@ module.exports = {
             
             
         });
+    } else {
+        message.reply(`Please only roll in the following channels: ${channelMention("852360137528049684")}, ${channelMention("1055380066315546704")}`);
+    }
         
     
 

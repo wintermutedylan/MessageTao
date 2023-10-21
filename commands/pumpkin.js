@@ -8,7 +8,7 @@ module.exports = {
 
         
 
-        
+        if (message.channel.id === "852360137528049684" || message.channel.id === "1055380066315546704"){
         const DM = await message.member.send('Please submit a image of your pumpkin/pumpkin design. [File type can be JPEG, PNG, JPG]');
         
         const filter = m => m.author.id === message.author.id;
@@ -67,6 +67,9 @@ module.exports = {
             
             
         });
+    } else {
+        message.reply(`Please only roll in the following channels: ${channelMention("852360137528049684")}, ${channelMention("1055380066315546704")}`)
+    }
         
     
 
